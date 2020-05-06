@@ -1,4 +1,4 @@
-FEATURES:
+# IF.03.01-03 Basic Web Techniques - Project Overview
+This coding assignment shall make you practice all concepts we have learned so far. Make sure that you read the section *Required Tasks*  in [CodingAssignment.md](CodingAssignment.md) carefully and to complete all the tasks listed there.
 
-The webapp will let the users create an account. After creating an account and logging in, 
-users will be able to connect with other users, who are currently online to chat with them about E-sports and other topics.
+Bruh
