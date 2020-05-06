@@ -1,4 +1,4 @@
 FEATURES:
 
-The webapp is going to show the game feeds and the upcoming games of the individual teams.
-It will also display additional data. For example the winrate of an individual teams.
+The webapp will let the users create an account. After creating an account and logging in, 
+users will be able to connect with other users, who are currently online to chat with them about E-sports and other topics.
