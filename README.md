@@ -1,4 +1,5 @@
-# IF.03.01-03 Basic Web Techniques - Project Overview
-This coding assignment shall make you practice all concepts we have learned so far. Make sure that you read the section *Required Tasks*  in [CodingAssignment.md](CodingAssignment.md) carefully and to complete all the tasks listed there.
-
-Bruh
+ The webapp will give users the opportunity to create an account on our website. 
+ After signing up and logging into the account, the user will be able to connect to other users who are also currently online,
+ to start a chat with them. In the chat they can discuss various topics surrounding E-Sports.
+ The sign up and log in is created using PHP and the users need to be stored in a database. 
+ The chat box is that users can use to send messages is created using Javascript.
