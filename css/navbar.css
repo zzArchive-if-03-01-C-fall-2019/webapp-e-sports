@@ -12,7 +12,7 @@ nav ul li ul{
     display: none;
     position: absolute;
     padding-top: 10px;
-     
+
 }
 
 nav ul li:hover ul{
@@ -47,6 +47,7 @@ a {
     padding: 6px 6px;
     background-size: 400%
 }
+
 
 a:hover {
     animation: animate 2s linear infinite;
