@@ -1,0 +1,50 @@
+{
+    "users": [
+        {
+            "id": 1, "userName": "williamlau", "password": "pass1"
+        },
+        {
+            "id": 2, "userName": "bauepete", "password": "pass21"
+        },
+        {
+            "id": 3, "userName": "zaman", "password": "absent"
+        }
+    ],
+    "posts": [
+        {
+            "id": 1,
+            "timestamp": "2020-06-04",
+            "userId": 1,
+            "receiverId": 2,
+            "text": "Haaaallllooo"
+        },
+        {
+            "id": 2,
+            "timestamp": "2020-06-04",
+            "userId": 2,
+            "receiverId": 1,
+            "text": "Haaaallllooo zruck"
+        },
+        {
+            "id": 3,
+            "timestamp": "2020-06-04",
+            "userId": 2,
+            "receiverId": 3,
+            "text": "Zwei auf drei"
+        },
+        {
+            "id": 4,
+            "timestamp": "2020-06-04",
+            "userId": 3,
+            "receiverId": 2,
+            "text": "drei auf zwei"
+        },
+        {
+            "id": 5,
+            "timestamp": "2020-06-04",
+            "userId": 3,
+            "receiverId": 1,
+            "text": "Drei an eins"
+        }
+    ]
+}

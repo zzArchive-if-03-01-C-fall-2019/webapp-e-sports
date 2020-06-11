@@ -1,0 +1,38 @@
+<link rel="stylesheet" type="text/css" href="../css/register.css" />
+<link rel="stylesheet" type="text/css" href="../css/navbar.css" />
+
+<nav>
+    <ul>
+        <li><a href="http://localhost:3000/index">Home</a></li>
+        <li><a href="http://localhost:3000/lol">League of Legends</a>
+            <ul>
+                <li><a href="http://localhost:3000/lolteams">LoL Teams</a></li>
+            </ul>
+        </li>
+        <li><a href="http://localhost:3000/csgo">Counter Strike</a>
+            <ul>
+                <li><a href="http://localhost:3000/csgoteams">CS:GO Teams</a></li>
+            </ul>
+        </li>
+        <li><a href="http://localhost:3000/changelog">Changelog</a></li>
+        <li><a href="login">LogIn</a></li>
+    </ul>
+</nav>
+
+<h1>Register</h1>
+<form action="/register" method="POST">
+  <div>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required>
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+  </div>
+  <button type="submit">Register</button>
+</form>
+ 
