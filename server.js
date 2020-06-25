@@ -77,6 +77,10 @@ app.get('/navi', function(req, res){
     res.sendFile(__dirname + '/views/html/navi.html');
 });
 
+app.get('/t1', function(req, res){
+    res.sendFile(__dirname + '/views/html/t1.html');
+});
+
 app.get('/chatbox', function(req, res){
     res.sendFile(__dirname + '/views/html/chatbox.html');
 });
@@ -157,3 +161,49 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 app.listen(3000)
+
+
+//chat
+
+var server = require("http").createServer(app);
+var io = require("socket.io").listen(server);
+//setting the required variables
+
+chatters = []; //users array
+chatterConnections = []; //connections array
+
+server.listen(process.env.PORT || 2020);  // It will run on localhost:(any number)
+console.log("Server Is Up");
+
+io.sockets.on("connection", function(socket){
+	//connection stuff
+	userConnections.push(socket);
+				io.sockets.emit("new user"); //checks if anyone is online
+
+	console.log("chatter connected: %s", userConnections.length);
+
+
+
+
+	// disconnection stuff
+	socket.on("disconnect", function(data){
+
+		chatters.splice(chatters.indexOf(socket.username), 1); //accessing the array memers
+
+						io.sockets.emit("chatter left"); //checks if memer left
+
+	userConnections.splice(userConnections.indexOf(socket),1);
+	console.log("chatter disconnected: %s ", userConnections.length);
+	});
+
+	//send dem meme messages
+	socket.on("send message", function(data){
+		console.log(data);// shows what the memers typed in console
+		io.sockets.emit("new message", {msg: data});
+
+
+	});
+
+
+
+	});

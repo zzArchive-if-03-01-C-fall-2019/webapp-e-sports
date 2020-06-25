@@ -1,56 +1,132 @@
-/* CSS Document */
-body {
-    font:12px arial;
-    color: #222;
-    text-align:center;
-    padding:35px; }
 
-form, p, span {
-    margin:0;
-    padding:0; }
+body{
+height: 500px;
+/* Create the parallax scrolling effect */
+background-attachment: fixed;
+background-position: center;
+background-repeat: no-repeat;
+background-size: 100%;
+background-image: url("images/background2.jpg");
+}
+#p{
+margin-top:9px;
+}
+#people{
 
-input { font:12px arial; }
+background-color: #ffff;
+width:250px;
+height:440px;
+margin-left:767px;
+margin-top:-462px;
+border: 6px solid white;
 
-a {
-    color:#0000FF;
-    text-decoration:none; }
 
-    a:hover { text-decoration:underline; }
 
-#wrapper, #loginform {
-    margin:0 auto;
-    padding-bottom:25px;
-    background:#EBF4FB;
-    width:504px;
-    border:1px solid #ACD8F0; }
+}
+#pr{
+font-size:12px;
+margin-top:-34px;
+margin-left: 82px;
+}
+#memechat{
+background-color:#0000;
+font-family: ModernSans;
+color:white;
+font-size: 30px;
+text-align:center;
+border: 2px solid white;
+border-radius:15px;
+width:190px;
+height:60px;
+}
 
-#loginform { padding-top:18px; }
+#btn{
+background: linear-gradient(90deg, #03a9f4, #f441a5, #ff3933, #9B00FE, #FFE000);
+font-size:15px;
+font-family: ModernSans;
+color:white;
+width:56px;
+height:51px;
+text-align: center;
+margin-left:0px;
+border-radius:10px;
+outline:none;
+border: 2px solid #ffffff;
+}
 
-    #loginform p { margin: 5px; }
+#btn1{
+background: linear-gradient(90deg, #03a9f4, #f441a5, #ff3933, #9B00FE, #FFE000);
+font-size:15px;
+font-family: ModernSans;
+color:white;
+width:100px;
+height:40px;
+text-align: center;
+margin-left:1040px;
+margin-top: -40px;
+border-radius:10px;
+outline:none;
+border: 2px solid #ffffff;
 
-#chatbox {
-    text-align:left;
-    margin:0 auto;
-    margin-bottom:25px;
-    padding:10px;
-    background:#fff;
-    height:270px;
-    width:430px;
-    border:1px solid #ACD8F0;
-    overflow:auto; }
+}
+#messageInput{
+ margin-left: 532px;
+text-align:center;
+border-radius:10px;
+outline:none;
+font-size:15px;
+font-family: ModernSans;
+color:black;
+width:250px;
+height:50px;
+margin-bottom: 30px;
+}
 
-#usermsg {
-    width:395px;
-    border:1px solid #ACD8F0; }
 
-#submit { width: 60px; }
+#t {
+text-align:left;
+font-size:15px;
+font-family: ModernSans;
+color:black;
+border: 2px solid #0000;
+  margin-top: -5px;
+  margin-left: 72px;
+  width:200px;
+  height:90px;
+  background-color:white;
+  border-radius:12px;
+  resize: none;
+      outline: none;
 
-.error { color: #ff0000; }
+}
+#chat{
 
-#menu { padding:12.5px 25px 12.5px 25px; }
+border: 6px solid white;
+width:459px;
+background-color:#0000;
+margin:auto;
+border-radius: 10px;
+margin-left:300px;
+}
 
-.welcome { float:left; }
+::-webkit-scrollbar {
+	display: none;
+}
+#circle{
+width:50px;
+height:50px;
+border-radius:100px;
+border: 5px solid white;
+margin-left:25px;
+background-color:#ffff;
 
-.logout { float:right; }
+}
+#circle1{
+width:50px;
+height:50px;
+border-radius:100px;
+border: 5px solid white;
+margin-left:25px;
+background-color:#ffff;
 
-.msgln { margin:0 0 2px 0; }
+}
