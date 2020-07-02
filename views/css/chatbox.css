@@ -1,3 +1,7 @@
+zz@font-face {
+    font-family: ModernSans;
+    src: url('fonts/ModernSans-Light.otf');
+}
 
 body{
 height: 500px;
@@ -28,7 +32,7 @@ font-size:12px;
 margin-top:-34px;
 margin-left: 82px;
 }
-#memechat{
+#chatbox{
 background-color:#0000;
 font-family: ModernSans;
 color:white;
@@ -52,6 +56,7 @@ margin-left:0px;
 border-radius:10px;
 outline:none;
 border: 2px solid #ffffff;
+cursor: pointer;
 }
 
 #btn1{
@@ -67,8 +72,9 @@ margin-top: -40px;
 border-radius:10px;
 outline:none;
 border: 2px solid #ffffff;
-
+cursor: pointer;
 }
+
 #messageInput{
  margin-left: 532px;
 text-align:center;
@@ -129,4 +135,54 @@ border: 5px solid white;
 margin-left:25px;
 background-color:#ffff;
 
+}
+
+a {
+    font-family: ModernSans;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 300px;
+    text-align: center;
+    line-height: 25px;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    font-family: ModernSans;
+    background: linear-gradient(90deg, #03a9f4, #f441a5, #ff3933, #9B00FE, #FFE000);
+    border-radius: 40px;
+    padding: 6px 6px;
+    background-size: 400%
+}
+
+
+a:hover {
+    animation: animate 2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        background-position: 0%;
+    }
+
+    50% {
+        background-position: 50%;
+    }
+
+    100% {
+        background-position: 100%;
+    }
+}
+
+input{
+    margin-left: 350px;
+    margin-top: 250px;
+    width:500px;
+    height:50px;
+}
+
+button{
+    width:100px;
+    height:55px;
 }

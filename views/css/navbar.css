@@ -48,6 +48,30 @@ a {
     background-size: 400%
 }
 
+button{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 35px;
+    text-align: center;
+    line-height: 20px;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    font-family: ModernSans;
+    background: linear-gradient(90deg, #03a9f4, #f441a5, #ff3933, #9B00FE, #FFE000);
+    border-radius: 40px;
+    padding: 6px 6px;
+    background-size: 400%;
+    float:right;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+button:hover{
+    animation: animate 2s linear infinite;
+}
 
 a:hover {
     animation: animate 2s linear infinite;

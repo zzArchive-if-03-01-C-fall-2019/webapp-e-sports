@@ -1,23 +1,37 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
+const path = require('path');
+const http = require('http');
+const express = require('express');
+const socketio = require('socket.io');
+const formatMessage = require('./utils/messages');
 
-const express = require('express')
-const app = express()
+
+var router = express.Router();
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var path = require('path');
-var router = express.Router();
+
+const {
+  userJoin,
+  getCurrentUser,
+  userLeave,
+  getRoomUsers
+} = require('./utils/users');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
+
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.static(__dirname + 'views'));
 app.use('/css',express.static(__dirname +'/views/css'));
 
-app.get('/index', function(req, res){
+app.get('', function(req, res){
     res.sendFile(__dirname + '/views/html/index.html');
 });
 
@@ -81,129 +95,75 @@ app.get('/t1', function(req, res){
     res.sendFile(__dirname + '/views/html/t1.html');
 });
 
-app.get('/chatbox', function(req, res){
-    res.sendFile(__dirname + '/views/html/chatbox.html');
+app.get('/t1', function(req, res){
+    res.sendFile(__dirname + '/views/html/t1.html');
+});
+
+app.get('/chatstart', function(req, res){
+    res.sendFile(__dirname + '/public/chatstart.html');
+});
+
+app.get('/chat', function(req, res){
+    res.sendFile(__dirname + '/public/chat.html');
 });
 
 
-const initializePassport = require('./passport-config')
-initializePassport(
-  passport,
-  email => users.find(user => user.email === email),
-  id => users.find(user => user.id === id)
-)
+const botName = 'Bot';
 
-const users = []
+// Run when client connects
+io.on('connection', socket => {
+  socket.on('joinRoom', ({ username, room }) => {
+    const user = userJoin(socket.id, username, room);
 
-app.set('view-engine', 'ejs')
-app.use(express.urlencoded({ extended: false }))
-app.use(flash())
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false
-}))
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(methodOverride('_method'))
+    socket.join(user.room);
 
-app.get('/', checkAuthenticated, (req, res) => {
-  res.render('index.ejs', { name: req.user.name })
-})
+    // Welcome current user
+    socket.emit('message', formatMessage(botName, 'Welcome to Chatbox!'));
 
-app.get('/login', checkNotAuthenticated, (req, res) => {
-  res.render('login.ejs')
-})
+    // Broadcast when a user connects
+    socket.broadcast
+      .to(user.room)
+      .emit(
+        'message',
+        formatMessage(botName, `${user.username} has joined the chat`)
+      );
 
-app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login',
-  failureFlash: true
-}))
+    // Send users and room info
+    io.to(user.room).emit('roomUsers', {
+      room: user.room,
+      users: getRoomUsers(user.room)
+    });
+  });
 
-app.get('/register', checkNotAuthenticated, (req, res) => {
-  res.render('register.ejs')
-})
+  // Listen for chatMessage
+  socket.on('chatMessage', msg => {
+    const user = getCurrentUser(socket.id);
 
-app.post('/register', checkNotAuthenticated, async (req, res) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    users.push({
-      id: Date.now().toString(),
-      name: req.body.name,
-      email: req.body.email,
-      password: hashedPassword
-    })
-    res.redirect('/login')
-  } catch {
-    res.redirect('/register')
-  }
-})
+    io.to(user.room).emit('message', formatMessage(user.username, msg));
+  });
 
-app.delete('/logout', (req, res) => {
-  req.logOut()
-  res.redirect('/login')
-})
+  // Runs when client disconnects
+  socket.on('disconnect', () => {
+    const user = userLeave(socket.id);
 
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next()
-  }
+    if (user) {
+      io.to(user.room).emit(
+        'message',
+        formatMessage(botName, `${user.username} has left the chat`)
+      );
 
-  res.redirect('/login')
-}
+      // Send users and room info
+      io.to(user.room).emit('roomUsers', {
+        room: user.room,
+        users: getRoomUsers(user.room)
+      });
+    }
+  });
+});
 
-function checkNotAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.redirect('/')
-  }
-  next()
-}
+const PORT = process.env.PORT || 3000;
 
-app.listen(3000)
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 
-//chat
-
-var server = require("http").createServer(app);
-var io = require("socket.io").listen(server);
-//setting the required variables
-
-chatters = []; //users array
-chatterConnections = []; //connections array
-
-server.listen(process.env.PORT || 2020);  // It will run on localhost:(any number)
-console.log("Server Is Up");
-
-io.sockets.on("connection", function(socket){
-	//connection stuff
-	userConnections.push(socket);
-				io.sockets.emit("new user"); //checks if anyone is online
-
-	console.log("chatter connected: %s", userConnections.length);
-
-
-
-
-	// disconnection stuff
-	socket.on("disconnect", function(data){
-
-		chatters.splice(chatters.indexOf(socket.username), 1); //accessing the array memers
-
-						io.sockets.emit("chatter left"); //checks if memer left
-
-	userConnections.splice(userConnections.indexOf(socket),1);
-	console.log("chatter disconnected: %s ", userConnections.length);
-	});
-
-	//send dem meme messages
-	socket.on("send message", function(data){
-		console.log(data);// shows what the memers typed in console
-		io.sockets.emit("new message", {msg: data});
-
-
-	});
-
-
-
-	});
+ 
